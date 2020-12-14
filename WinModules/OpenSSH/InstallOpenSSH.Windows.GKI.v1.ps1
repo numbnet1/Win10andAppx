@@ -7,22 +7,20 @@ New-Item -Path $env:Temp -Name "OpenSSH" -ItemType Directory -force;
 
 ####====================================================
 ### Download OpenSSH
-
-#### --------------------
-#### OpenSSH  --x64    --v7.9.0.0p1-Beta
-	#(New-Object System.Net.WebClient).DownloadFile('https://github.com/PowerShell/Win32-OpenSSH/releases/download/v7.9.0.0p1-Beta/OpenSSH-Win64.zip','$env:Temp\OpenSSH\OpenSSH-Win64.zip');
-
-#### --------------------
-#### OpenSSH  --x32    --v7.9.0.0p1-Beta
-	#(New-Object System.Net.WebClient).DownloadFile('https://github.com/PowerShell/Win32-OpenSSH/releases/download/v7.9.0.0p1-Beta/OpenSSH-Win32.zip','$env:Temp\OpenSSH\OpenSSH-Win64.zip');
-
-#### --------------------
-#### OpenSSH  --x64    --v8.1.0.0p1-Beta
+#### ---------------------------------------------------
+#### ---------------------------------------------------
+#### OpenSSH    --v7.9.0.0p1-Beta    --x64
+#(New-Object System.Net.WebClient).DownloadFile('https://github.com/PowerShell/Win32-OpenSSH/releases/download/v7.9.0.0p1-Beta/OpenSSH-Win64.zip','$env:Temp\OpenSSH\OpenSSH-Win64.zip');
+#### ---------------------------------------------------
+#### OpenSSH    --v7.9.0.0p1-Beta    --x32
+#(New-Object System.Net.WebClient).DownloadFile('https://github.com/PowerShell/Win32-OpenSSH/releases/download/v7.9.0.0p1-Beta/OpenSSH-Win32.zip','$env:Temp\OpenSSH\OpenSSH-Win64.zip');
+#### ---------------------------------------------------
+#### ---------------------------------------------------
+#### OpenSSH    --v8.1.0.0p1-Beta    --x64
 (New-Object System.Net.WebClient).DownloadFile('https://github.com/PowerShell/Win32-OpenSSH/releases/download/v8.1.0.0p1-Beta/OpenSSH-Win64.zip','$env:Temp\OpenSSH\OpenSSH-Win64.zip');
-
-#### --------------------
-#### OpenSSH  --x32    --v8.1.0.0p1-Beta
-	#(New-Object System.Net.WebClient).DownloadFile('https://github.com/PowerShell/Win32-OpenSSH/releases/download/v8.1.0.0p1-Beta/OpenSSH-Win32.zip','$env:Temp\OpenSSH\OpenSSH-Win32.zip');
+#### ---------------------------------------------------
+#### OpenSSH    --v8.1.0.0p1-Beta    --x32
+#(New-Object System.Net.WebClient).DownloadFile('https://github.com/PowerShell/Win32-OpenSSH/releases/download/v8.1.0.0p1-Beta/OpenSSH-Win32.zip','$env:Temp\OpenSSH\OpenSSH-Win32.zip');
 
 
 
