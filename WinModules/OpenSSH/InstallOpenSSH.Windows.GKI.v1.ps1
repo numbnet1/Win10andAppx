@@ -23,7 +23,6 @@ New-Item -Path $env:Temp -Name "OpenSSH" -ItemType Directory -force;
 #(New-Object System.Net.WebClient).DownloadFile('https://github.com/PowerShell/Win32-OpenSSH/releases/download/v8.1.0.0p1-Beta/OpenSSH-Win32.zip','$env:Temp\OpenSSH\OpenSSH-Win32.zip');
 
 
-
 ####====================================================
 #### Unzip the files
 Expand-Archive -Path "$env:temp\OpenSSH\OpenSSH-Win64.Zip" -DestinationPath "$env:ProgramFiles\OpenSSH\";
