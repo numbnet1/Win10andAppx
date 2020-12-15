@@ -1,0 +1,60 @@
+<html>
+   <head>
+     <title>OutlookContacts2CiscoJabberXML.hta</title>
+     <hta:application scroll="no" windowState="normal">
+  </head>
+  <script language="VBScript">
+    
+	sub Window_onLoad()
+		Window.resizeTo 550, 850
+		crlf = chr(13) & chr(10)
+		olFolderContacts = 10
+		
+		Set objShell = CreateObject("WScript.Shell")
+		oFolder = objShell.expandenvironmentstrings("%userprofile%") & "\Desktop\"
+		
+		set oFSO=CreateObject("Scripting.FileSystemObject")
+		set oFile=oFSO.CreateTextFile(oFolder & "contacts.xml",2)
+			
+		Set objOutlook = CreateObject("Outlook.Application")
+		Set objNamespace = objOutlook.GetNamespace("MAPI")
+		Set colContacts = objNamespace.GetDefaultFolder(olFolderContacts).Items
+				
+		xmlOutput = "<?xml version=""1.0"" encoding=""utf-8""?>" & crlf
+		xmlOutput = xmlOutput & "<buddylist>" & crlf
+		xmlOutput = xmlOutput & "  <group>" & crlf
+		xmlOutput = xmlOutput & "    <gname>Imported</gname>" & crlf
+
+		On Error Resume Next
+		For Each objContact In colContacts  
+			If InStr(objContact.Email1Address, "@") > 0 Then
+				xmlOutput = xmlOutput & "    <user>" & crlf
+				xmlOutput = xmlOutput & "      <uname>" & objContact.Email1Address & "</uname>" & crlf
+				if Len(objContact.FullName) > 0 then
+					xmlOutput = xmlOutput & "      <fname>" & objContact.FullName & "</fname>" & crlf
+				else 
+					xmlOutput = xmlOutput & "      <fname>" & objContact.FirstName & " " & objContact.FirstName &"</fname>" & crlf
+				end if
+				if Len(objContact.BusinessTelephoneNumber) > 0 then
+					xmlOutput = xmlOutput & "      <phoneNumber>" & objContact.BusinessTelephoneNumber & "</phoneNumber>" & crlf
+				else
+					xmlOutput = xmlOutput & "      <phoneNumber>" & objContact.MobileTelephoneNumber & "</phoneNumber>" & crlf
+				end if
+				xmlOutput = xmlOutput & "    </user>" & crlf
+			End If		 
+		Next
+
+		xmlOutput = xmlOutput & "    </group>" & crlf
+		xmlOutput = xmlOutput & "</buddylist>" & crlf
+		
+		document.all.xmlTextArea.value=xmlOutput
+		
+		oFile.writeline xmlOutput
+		oFile.Close
+	end sub
+
+  </script>
+  <body>
+     <textarea name="xmlTextArea" rows=48 cols=60></textarea><p>
+   </body>
+</html>

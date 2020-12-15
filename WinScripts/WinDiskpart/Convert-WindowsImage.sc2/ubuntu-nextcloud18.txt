@@ -1,0 +1,40 @@
+# sudo su - 
+# systemctl stop apparmor
+# systemctl disable apparmor
+# apt purge popularity-contest app* snapd cloud* ubuntu-advantage*
+# rm -rf /etc/cloud/
+# rm -rf /var/lib/cloud/
+# rm -rf /root/snap
+# apt autoremove
+# apt update
+# apt ugprade
+# reboot
+#
+# sudo su -
+# apt install apache2 php7.2 bzip2 libapache2-mod-php php-gd php-json php-mysql php-curl php-mbstring php-intl php-imagick php-xml php-zip sqlite3 php-sqlite3
+# cd /var/www
+# wget https://download.nextcloud.com/server/releases/latest-18.tar.bz2
+# tar -xvjf nextcloud-18-latest.tar.bz2
+# chown -R www-data:www-data nextcloud
+# vi /etc/apache2/sites-available/nextcloud.conf Alias /nextcloud "/var/www/nextcloud/"   <Directory /var/www/nextcloud/>   Options +FollowSymlinks   AllowOverride All   <IfModule mod_dav.c>   Dav off  </IfModule>   SetEnv HOME /var/www/nextcloud  SetEnv HTTP_HOME /var/www/nextcloud  </Directory>
+# a2ensite nextcloud
+# a2enmod rewrite headers env dir mime
+# sed -i '/^memory_limit =/s/=.*/= 512M/' /etc/php/7.2/apache2/php.ini
+#
+# cd /var/www/html
+# git clone https://github.com/linuxserver/Heimdall.git
+# chown -R www-data:www-data Heimdall
+# vi /etc/apache2/sites-enabled/000-default.conf
+     <VirtualHost …
+             DocumentRoot /var/www/html/Heimdall/public/
+             DirectoryIndex index.php 
+     …
+     </VirtualHost>
+      
+            <Directory /var/www/html/Heimdall/public/>
+                 Options Indexes FollowSymLinks MultiViews
+                 AllowOverride all
+                 Order allow,deny
+                 allow from all
+             </Directory>
+# systemctl reload apache2

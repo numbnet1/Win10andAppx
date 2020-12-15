@@ -68,8 +68,10 @@ New-item -Path $env:USERPROFILE -Name .ssh -ItemType Directory -force;
 
 
 ####====================================================
-#### Copy key
-echo "MYSSHKEY.pub" | Out-File $env:USERPROFILE\.ssh\authorized_keys -Encoding ascii;
+#### Copy key V1:
+cat $env:USERPROFILE\.ssh\nn.ed25519.key.pub | Out-File $env:USERPROFILE\.ssh\authorized_keys -Encoding ascii;
+#### Copy key V1:
+# echo "" | Out-File $env:USERPROFILE\.ssh\authorized_keys -Encoding ascii;
 
 
 ####====================================================
