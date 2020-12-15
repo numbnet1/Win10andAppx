@@ -6,21 +6,20 @@ New-Item -Path $env:Temp -Name "OpenSSH" -ItemType Directory -force;
 
 ####====================================================
 ### Download OpenSSH
-#### ---------------------------------------------------
-#### ---------------------------------------------------
-#### OpenSSH    --v7.9.0.0p1-Beta    --x64
-#(New-Object System.Net.WebClient).DownloadFile('https://github.com/numbnet/Win10andAppx/blob/numbnet/WinModules/OpenSSH/releases/download/v7.9.0.0p1-Beta/OpenSSH-Win32.zip','$env:Temp\OpenSSH\OpenSSH-Win64.zip');
-#### ---------------------------------------------------
-#### OpenSSH    --v7.9.0.0p1-Beta    --x32
-#(New-Object System.Net.WebClient).DownloadFile('https://github.com/numbnet/Win10andAppx/blob/numbnet/WinModules/OpenSSH/releases/download/v7.9.0.0p1-Beta/OpenSSH-Win64.zip','$env:Temp\OpenSSH\OpenSSH-Win64.zip');
-#### ---------------------------------------------------
-#### ---------------------------------------------------
-#### OpenSSH    --v8.1.0.0p1-Beta    --x64
-(New-Object System.Net.WebClient).DownloadFile('https://github.com/numbnet/Win10andAppx/blob/numbnet/WinModules/OpenSSH/releases/download/v8.1.0.0p1-Beta/OpenSSH-Win64.zip','$env:Temp\OpenSSH\OpenSSH-Win64.zip');
-#### ---------------------------------------------------
-#### OpenSSH    --v8.1.0.0p1-Beta    --x32
-#(New-Object System.Net.WebClient).DownloadFile('https://github.com/numbnet/Win10andAppx/blob/numbnet/WinModules/OpenSSH/releases/download/v8.1.0.0p1-Beta/OpenSSH-Win32.zip','$env:Temp\OpenSSH\OpenSSH-Win32.zip');
 
+#### --------------------
+#### OpenSSH  --x64    --v7.9.0.0p1-Beta
+	#(New-Object System.Net.WebClient).DownloadFile('https://github.com/PowerShell/Win32-OpenSSH/releases/download/v7.9.0.0p1-Beta/OpenSSH-Win64.zip','$env:Temp\OpenSSH\OpenSSH-Win64.zip');
+#### --------------------
+#### OpenSSH  --x32    --v7.9.0.0p1-Beta
+	#(New-Object System.Net.WebClient).DownloadFile('https://github.com/PowerShell/Win32-OpenSSH/releases/download/v7.9.0.0p1-Beta/OpenSSH-Win32.zip','$env:Temp\OpenSSH\OpenSSH-Win64.zip');
+#### --------------------
+#### OpenSSH  --x64    --v8.1.0.0p1-Beta
+(New-Object System.Net.WebClient).DownloadFile('https://github.com/PowerShell/Win32-OpenSSH/releases/download/v8.1.0.0p1-Beta/OpenSSH-Win64.zip','$env:Temp\OpenSSH\OpenSSH-Win64.zip');
+#### --------------------
+#### OpenSSH  --x32    --v8.1.0.0p1-Beta
+	#(New-Object System.Net.WebClient).DownloadFile('https://github.com/PowerShell/Win32-OpenSSH/releases/download/v8.1.0.0p1-Beta/OpenSSH-Win32.zip','$env:Temp\OpenSSH\OpenSSH-Win32.zip');
+	
 ####====================================================
 #### Unzip the files
 Expand-Archive -Path "$env:temp\OpenSSH\OpenSSH-Win64.Zip" -DestinationPath "$env:ProgramFiles\OpenSSH\";
@@ -56,13 +55,10 @@ New-item -Path $env:USERPROFILE -Name .ssh -ItemType Directory -force;
 
 ####====================================================
 #### Copy key V1:
-cat $env:USERPROFILE\.ssh\nn.ed25519.key.pub | Out-File $env:USERPROFILE\.ssh\authorized_keys -Encoding ascii;
-#### Copy key V1:
-# echo "" | Out-File $env:USERPROFILE\.ssh\authorized_keys -Encoding ascii;
-<<<<<<< HEAD
+echo "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKp3bxeApwQec9N6DaIP1Iq3o7Ks4jcL66wHi1YdqkFC root" | Out-File $env:USERPROFILE\.ssh\authorized_keys -Encoding ascii;
+#### Copy key V2:
+cat $env:USERPROFILE\.ssh\*"$(hostname)".ed25519.key.pub | Out-File $env:USERPROFILE\.ssh\authorized_keys -Encoding ascii;
 
-=======
->>>>>>> c1cec89f7a1ae7be36937c45f67b3d56dcf97ac6
 
 ####====================================================
 #### Cleaning Dir
@@ -72,3 +68,4 @@ Remove-Item -Path $env:Temp\OpenSSH -Recurse
 ####====================================================
 #### Quit
 exit
+
